@@ -1,0 +1,25 @@
+{
+    "name": "cysha/controlpanel",
+    "description": "",
+    "authors": [{
+        "name": "Dan Aldridge",
+        "email": "xLink@cybershade.org"
+    }],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support":   "4.0.*",
+        "laravelbook/ardent":   "dev-master",
+        "illuminate/auth":      "4.0.*",
+        "teepluss/theme":       "dev-master",
+        "toddish/verify":       "2.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Cysha\\ControlPanel": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
