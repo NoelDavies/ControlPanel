@@ -5,7 +5,7 @@ return array(
 	'auth' => array(
 		'attempt-fail'   => 'Attempt failed',
 		'logout-success' => 'Logout success',
-		'insufficient-permission' => 'Insufficient permission',
+		'permission-denied' => 'You do not have permission to be there!',
 		'user-not-found' => 'User not found'
 	),
 	'store-success' => 'Store success',

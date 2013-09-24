@@ -29,6 +29,7 @@ class CPServiceProvider extends ServiceProvider {
 		// include the config directory
 		$this->app['config']->package('cysha/controlpanel', __DIR__.'/../../config');
 
+		include __DIR__.'/filters.php';
 
 		// we have a few default routes in the admin panel, do we want to use them?
 		if( $this->app['config']->get('controlpanel::default_routing') === true ){

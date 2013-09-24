@@ -1,8 +1,8 @@
 <div class="container">
 
-	<form class="form-signin span6" method="post">
+	<form class="form-signin span6" method="post" autocomplete="off">
 		{{ Form::token() }}
-		<h3 class="form-signin-heading">{{ Config::get('app.site-name') }} Login</h3>
+		<h3 class="form-signin-heading">{{ Config::get('app.site-name') }} ACP Login</h3>
 
 		<input type="text" name="username" class="input-block-level" placeholder="Username">
 		<input type="password" name="password" class="input-block-level" placeholder="Password">
