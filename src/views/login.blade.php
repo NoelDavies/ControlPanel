@@ -1,11 +1,8 @@
 <div class="container">
 
-	<form class="form-signin" method="post">
-
+	<form class="form-signin span6" method="post">
 		{{ Form::token() }}
-		<h3 class="form-signin-heading">Please sign in</h3>
-
-		{{ View::make('controlpanel::partials.form-message') }}
+		<h3 class="form-signin-heading">{{ Config::get('app.site-name') }} Login</h3>
 
 		<input type="text" name="username" class="input-block-level" placeholder="Username">
 		<input type="password" name="password" class="input-block-level" placeholder="Password">
@@ -16,4 +13,4 @@
 		<button class="btn btn-primary" type="submit">{{ Lang::get('controlpanel::admin.sign-in') }}</button>
 	</form>
 
-</div> <!-- /container -->
+</div>

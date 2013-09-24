@@ -12,14 +12,16 @@ class BaseController extends Controller {
 	public $objTheme;
 	public $themeData = array();
 
-	protected function setupLayout(){
+	protected function __construct(){
         $this->objTheme = Theme::uses( Config::get('controlpanel::acp_layout') )
-        					 ->layout( Config::get('controlpanel::acp_columns') );
+        					 ->layout( Config::get('controlpanel::acp_columns') )
+                             ->setLayout( Config::get('controlpanel::acp_columns') );
 
     	$this->themeData = array(
-    		'app_name' => Config::get('app.name'),
+    		'_siteName' => Config::get('app.site-name'),
     	);
 
+    	return $this;
 	}
 
 }

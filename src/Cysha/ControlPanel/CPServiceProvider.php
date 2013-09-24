@@ -17,7 +17,7 @@ class CPServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot() {
-		$this->package('Cysha/ControlPanel');
+		$this->package('cysha/controlpanel');
 	}
 
 	/**
@@ -28,8 +28,6 @@ class CPServiceProvider extends ServiceProvider {
 	public function register() {
 		// include the config directory
 		$this->app['config']->package('cysha/controlpanel', __DIR__.'/../../config');
-
-		\View::addNamespace('controlpanel', __DIR__.'/../../views');
 
 
 		// we have a few default routes in the admin panel, do we want to use them?

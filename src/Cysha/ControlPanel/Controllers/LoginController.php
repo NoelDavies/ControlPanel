@@ -8,23 +8,31 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Lang;
 
+use Teepluss\Theme\Facades\Theme;
 use Cysha\ControlPanel\Controllers\Base\BaseController;
 
 class LoginController extends BaseController {
 
 	public function __construct(){
-    	// Add csrf protection when posting forms
-    	$this->beforeFilter('csrf', array('on' => 'post'));
-    }
+		// Add csrf protection when posting forms
+		$this->beforeFilter('csrf', array('on' => 'post'));
+		parent::__construct();
+	}
 
+	/**
+	 * Get the login form, this will use the default theme
+	 *
+	 */
 	public function getIndex() {
-		$this->layout->content = View::make('controlpanel::login.form');
+        $this->objTheme->layout('blank')->setLayout('blank');
+
+		return $this->objTheme->of( 'controlpanel::login', $this->themeData )->render();
 	}
 
 	public function postIndex()	{
 		$credentials = array(
-			'username' => Input::get('username'),
-			'password' => Input::get('password'),
+			'identifier' 	=> Input::get('username'),
+			'password' 		=> Input::get('password'),
 		);
 
 		$remember = false;
@@ -34,7 +42,7 @@ class LoginController extends BaseController {
 
 		if( !Auth::attempt($credentials, $remember) ){
 			return Redirect::route('get admin/login')
-				->with('reason', Lang::get('controlpanel::admin.messages.attempt-fail'))
+				->with('reason', Lang::get('controlpanel::admin.auth.attempt-fail'))
 				->with('error', 1);
 		}else{
 			return Redirect::to('admin');
@@ -45,27 +53,27 @@ class LoginController extends BaseController {
 		Auth::logout();
 
 		return Redirect::route('get admin/login')
-			->with('success', Lang::get('controlpanel::admin.messages.logout-success'));
+			->with('success', Lang::get('controlpanel::admin.auth.logout-success'));
 	}
 
 	public function getForgotPassword() {
-		$this->layout->content = View::make('controlpanel::login.forgot-password');
+		return $this->objTheme->of( 'controlpanel::forgotpassword', $this->themeData )->render();
 	}
 
 	public function postForgotPassword() {
-    	return Password::remind(array('email' => Input::get('email')));
+		return Password::remind(array('email' => Input::get('email')));
 	}
 
 	public function getResetPassword($token) {
-		$this->layout->content = View::make('controlpanel::login.password-reset')->with('token', $token);
+		return $this->objTheme->of( 'controlpanel::resetpassword', array_merge($this->themeData, array('token' => $token)) )->render();
 	}
 
 	public function postResetPassword($token) {
-	    return Password::reset(array('email' => Input::get('email')), function($user, $password) {
-	        $user->password = $password;
-	        $user->forceSave();
+		return Password::reset(array('email' => Input::get('email')), function($user, $password) {
+			$user->password = $password;
+			$user->forceSave();
 
-	        return Redirect::route('get admin/login');
-	    });
+			return Redirect::route('get admin/login');
+		});
 	}
 }

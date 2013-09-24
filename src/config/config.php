@@ -10,4 +10,5 @@ return array(
 	// routing settings
 	'default_routing' 	=> true,
 
+	'acp_groups'		=> array('God', 'Admin'),
 );

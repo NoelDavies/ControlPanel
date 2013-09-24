@@ -7,10 +7,14 @@ use Cysha\ControlPanel\Controllers\Base\BaseController;
 
 class DashboardController extends BaseController {
 
+	public function __construct(){
+		parent::__construct();
+	}
+
 	public function getIndex() {
-		$this->setupLayout();
+		//$this->setupLayout();
 
 		$data = $this->themeData;
-		return $this->objTheme->of( 'controlpanel::dashboard.index', $data)->render();
+		return $this->objTheme->of( 'controlpanel::dashboard.index', $data )->render();
 	}
 }
