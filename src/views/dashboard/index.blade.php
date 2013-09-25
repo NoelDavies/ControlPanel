@@ -1,1 +1,1 @@
-<h4>DAHSBOARD!</h4>
+<h4>DASHBOARD!</h4>
